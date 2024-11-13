@@ -18,6 +18,10 @@ retrofit = "2.11.0"
 mockk = "1.13.13"
 coroutines-test = "1.9.0"
 turbine = "1.2.0"
+constraint-layout = "1.0.1"
+osmdroid = "6.1.20"
+playServicesLocation = "21.3.0"
+accompanist-permission = "0.36.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -44,6 +48,11 @@ retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test"}
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine"}
+constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraint-layout"}
+osmdroid = { group = "org.osmdroid", name="osmdroid-android", version.ref = "osmdroid"}
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+accompanist-permission = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist-permission"}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

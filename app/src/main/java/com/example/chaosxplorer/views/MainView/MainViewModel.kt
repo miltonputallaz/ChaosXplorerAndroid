@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.chaosxplorer.internal.DataState
 import com.example.chaosxplorer.repository.ItemRepository
+import com.example.chaosxplorer.views.AlertDialogClass
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +19,11 @@ class MainViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(MainUIState())
-    val uiState: StateFlow<MainUIState> = _uiState.asStateFlow()
+    val uiState: StateFlow<MainUIState> = _uiState
+
+    init {
+        //getItems()
+    }
 
     fun getItems() {
         viewModelScope.launch {
@@ -32,5 +37,16 @@ class MainViewModel @Inject constructor(
 
         }
     }
+
+    fun showDialog(alertDialogClass: AlertDialogClass) {
+        _uiState.value = _uiState.value.copy(alertDialogClass = alertDialogClass)
+    }
+
+
+    fun hideDialog() {
+        _uiState.value = _uiState.value.copy(alertDialogClass = null)
+    }
+
+
 
 }

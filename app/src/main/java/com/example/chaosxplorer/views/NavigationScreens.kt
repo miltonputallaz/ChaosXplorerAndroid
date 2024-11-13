@@ -4,5 +4,8 @@ import kotlinx.serialization.Serializable
 
 sealed class NavigationScreens {
     @Serializable
-    object MainView : NavigationScreens()
+    data object MainView : NavigationScreens()
+
+    @Serializable
+    data object MapView : NavigationScreens()
 }
