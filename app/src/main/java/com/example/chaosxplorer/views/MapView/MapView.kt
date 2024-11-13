@@ -27,10 +27,13 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 @Composable
 fun MapView(
+    mapViewModel: MapViewModel,
     modifier: Modifier) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val lifecycleState by lifecycleOwner.lifecycle.currentStateFlow.collectAsState()
     lateinit var mMap: MapView
+
+    val mapState by mapViewModel.uiState.collectAsState()
 
     LaunchedEffect(lifecycleState) {
         // Do something with your state
@@ -64,14 +67,16 @@ fun MapView(
     }
 
     AndroidView(
-        modifier = modifier.safeDrawingPadding().fillMaxSize(), // Occupy the max size in the Compose UI tree
+        modifier = modifier
+            .safeDrawingPadding()
+            .fillMaxSize(), // Occupy the max size in the Compose UI tree
         factory = { context ->
             // Creates view
             View.inflate(context, R.layout.map_view, null)
         },
         update = { view ->
             mMap = view.findViewById(R.id.map_view)
-            mMap.setTileSource(TileSourceFactory.USGS_TOPO)
+            mMap.setTileSource(TileSourceFactory.OpenTopo)
             mMap.mapCenter
             mMap.setMultiTouchControls(true)
             mMap.getLocalVisibleRect(Rect())
@@ -82,6 +87,10 @@ fun MapView(
             mMyLocationOverlay.enableMyLocation()
             mMyLocationOverlay.enableFollowLocation()
             mMyLocationOverlay.isDrawAccuracyEnabled = true
+            mapState.location?.let {
+                mMap.overlays.add(mMyLocationOverlay)
+            }
+
 
             controller.setZoom(9.5)
             val startPoint = GeoPoint(48.8583, 2.2944);
@@ -94,6 +103,7 @@ fun MapView(
             rotationGestureOverlay.isEnabled
             mMap.setMultiTouchControls(true)
             mMap.overlays.add(rotationGestureOverlay)
+
 
         }
     )

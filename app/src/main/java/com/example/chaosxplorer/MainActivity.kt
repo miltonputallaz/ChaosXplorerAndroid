@@ -32,6 +32,7 @@ import com.example.chaosxplorer.views.AlertDialogClass
 import com.example.chaosxplorer.views.MainView.MainView
 import com.example.chaosxplorer.views.MainView.MainViewModel
 import com.example.chaosxplorer.views.MapView.MapView
+import com.example.chaosxplorer.views.MapView.MapViewModel
 import com.example.chaosxplorer.views.NavigationScreens
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -62,7 +63,8 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         composable<NavigationScreens.MapView> {
-                            MapView(Modifier.padding(innerPadding),)
+                            val viewModel = hiltViewModel<MapViewModel>()
+                            MapView(viewModel, Modifier.padding(innerPadding))
                         }
                     }
                 }
